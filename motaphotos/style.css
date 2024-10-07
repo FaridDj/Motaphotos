@@ -1,0 +1,176 @@
+/*
+Theme Name: motaphoto
+Theme URI: https://www.motophoto.fr
+Author: Farid DJAOUTI
+Description: Thème pour la photographe freelance Motaphoto"
+Version: 1.0
+Text Domain: motaphoto
+*/
+ 
+ /* The Modal (background) */
+ body {
+   margin: 0;
+   font-size : 14px;
+   font-weight : 400;
+}
+
+/* Font SpaceMono/ */
+@font-face {
+   font-family: 'SpaceMono';
+   src: url('./fonts/SpaceMono/SpaceMono-Bold.ttf') format('truetype');
+   font-weight: 400;
+   font-style: normal;
+}
+
+@font-face {
+   font-family: 'SpaceMono';
+   src: url('./fonts/SpaceMono/SpaceMono-BoldItalic.ttf') format('truetype');
+   font-weight: 400;
+   font-style: italic;
+}
+
+@font-face {
+   font-family: 'SpaceMono';
+   src: url('./fonts/SpaceMono/SpaceMono-Italic.ttf') format('truetype');
+   font-weight: 700;
+   font-style: italic;
+}
+
+@font-face {
+   font-family: 'SpaceMono';
+   src: url('./fonts/SpaceMono/SpaceMono-Regular.ttf') format('truetype');
+   font-weight: 700;
+   font-style: normal;
+}
+
+.logo-img-mini {
+   height: 14px;
+   padding-bottom: 5px;
+}
+
+nav {
+   display: flex;
+}
+
+nav li,
+#menu-footer li {
+   list-style-type: none;
+   margin-left: 30px;
+   font-family: "SpaceMono" ;
+}
+
+nav a,
+#menu-footer a {
+   text-decoration: none;
+   color: black;
+   text-transform: uppercase;
+}
+
+.menu-menu-principal-container li a:hover,
+.menu-footer-container li a:hover {
+   font-weight: 700;
+}
+/* ---Modale de contact--- */
+
+.modal {
+   height: 100%;
+   margin: auto;
+   position: fixed;
+   top: 0;
+   left: -100%;
+   
+   transition: left 0.5s ease;
+}
+
+.modal.active {
+   left: 0;
+    width: 100%;
+   }
+
+/* The Close Button */
+.close {
+   
+   float: right;
+   font-size: 28px;
+   font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+   color: black;
+   text-decoration: none;
+   cursor: pointer;
+}
+
+#myModal {
+   position:fixed;
+   z-index: 10;
+   height: 850px;
+   text-align: center;
+   display: flex;
+   justify-content: center;
+   border: 5px solid black;
+   width: 597px;
+   background-color : white;
+   font-weight : 500;
+   font-size : 12px;
+   top: 60px;
+   overflow: auto;
+}
+
+/* bouton submit formulaire */
+.wpcf7-submit {
+   width: 100%;
+   background-color: #D8D8D8;
+   color: #000000;
+   border: none;
+   border-radius: 0px;
+   height : 70px;
+   text-align: center;
+  font-weight: 500;
+  font-size: 12px;
+  width: 280px;
+}
+
+.nf-field-element #nf-field-9:hover{
+   background-color: black;
+   color: white;
+   transition: 0.5s;
+}
+
+.nf-field {
+   display: flex;
+   justify-content: center;
+}
+
+.nf-field .field-wrap {
+   width: 60%;
+}
+
+.nf-field-element .ninja-forms-field.nf-element {
+   border-radius: 10px;
+}
+
+.nf-field-element .ninja-forms-field.nf-element ::after {
+   border-radius: 0px 10px 10px 0px;
+}
+
+.ninja-forms-req-symbol,
+.nf-form-fields-required {
+   display: none;
+}
+
+#menuBtn,
+.menu-fullscreen,
+#menuBtnFermeture {
+   display: none;
+}
+
+.top-menu {
+   margin-left: 10%;
+   margin-right: 10%;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   width: 100%;
+}
