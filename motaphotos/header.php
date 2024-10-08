@@ -8,7 +8,7 @@
 </head>
 <body <?php body_class(); ?>>
     <header>
-        <div>
+        <div class="logo">
             <a href="<?php echo esc_url(home_url('/')); ?>">
                 <img class="logo-img-mini" src="<?php echo get_stylesheet_directory_uri() . '/images/Nathalie Mota2.png'; ?>" alt="Motaphoto">
             </a>

@@ -7,11 +7,18 @@ Version: 1.0
 Text Domain: motaphoto
 */
  
- /* The Modal (background) */
- body {
-   margin: 0;
-   font-size : 14px;
-   font-weight : 400;
+
+body {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   max-width: 1440px;
+   padding: 0 12%;
+}
+
+.main-container {
+   width: 100%;
+   box-sizing: border-box;
 }
 
 /* Font SpaceMono/ */
@@ -48,8 +55,32 @@ Text Domain: motaphoto
    padding-bottom: 5px;
 }
 
+header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: "SpaceMono" ;
+      font-weight : 400;
+      font-size : 16px;
+      margin: 0;
+      box-shadow: 0px 4px 4px 0px #00000017;
+  }
+  
+.logo {
+   width: 40%;
+   text-align: center;
+
+}
+
 nav {
+   text-align: right;
+}
+
+nav ul {
    display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   
 }
 
 nav li,
@@ -64,13 +95,13 @@ nav a,
    text-decoration: none;
    color: black;
    text-transform: uppercase;
-}
-
-.menu-menu-principal-container li a:hover,
-.menu-footer-container li a:hover {
    font-weight: 700;
 }
-/* ---Modale de contact--- */
+nav a:hover{
+   font-weight: 20;
+   font-size: 20px;
+
+}
 
 .modal {
    height: 100%;
