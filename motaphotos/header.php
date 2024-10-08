@@ -13,7 +13,6 @@
                 <img class="logo-img-mini" src="<?php echo get_stylesheet_directory_uri() . '/images/Nathalie Mota2.png'; ?>" alt="Motaphoto">
             </a>
         </div>
-
         <nav>
             <?php
                 get_template_part('templates_part/modale');
@@ -23,7 +22,8 @@
             ?>
         </nav>
     </header>
-    
+
     <?php wp_footer(); ?>
+    
 </body>
 </html>
