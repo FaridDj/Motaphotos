@@ -1,0 +1,31 @@
+ /* The Modal (background) */
+ .modal {
+   height: 100%;
+   margin: auto;
+   position: fixed;
+   top: 0;
+   left: -100%;
+   
+   transition: left 0.5s ease;
+}
+
+.modal.active {
+   left: 0;
+    width: 100%;
+   }
+
+/* The Close Button */
+.close {
+   
+   float: right;
+   font-size: 28px;
+   font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+   color: black;
+   text-decoration: none;
+   cursor: pointer;
+}
+
