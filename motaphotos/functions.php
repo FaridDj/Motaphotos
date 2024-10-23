@@ -1,18 +1,21 @@
 <?php
 
-function theme_enqueue_styles() {
-
-    wp_enqueue_style( 'first-style', get_stylesheet_directory_uri() . '/style.css' );
+function motaphotos_scripts() {
+	wp_enqueue_style('my-theme-style', get_stylesheet_uri()); 
+	wp_enqueue_style( 'first-style', get_stylesheet_directory_uri() . '/style.css' );
     wp_enqueue_script( 'custom-scripts', get_stylesheet_directory_uri() . '/js/scripts.js', array('jquery'), '1.0', true );
     wp_enqueue_style( 'local-fonts', get_stylesheet_directory_uri() . '/fonts/fonts.css', array(), '1.0' );
+    
 }
-add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
+add_action( 'wp_enqueue_scripts', 'motaphotos_scripts' );
 
-// Activer les fonctionnalités du thème, y compris les menus
-function register_my_menus() {
-    register_nav_menus(array(
-        'main' => __('Menu principal', 'text-domain'),
-        
-    ));
+function motaphotos_setup() {
+	register_nav_menus(
+		array(
+			 'main' => __('Menu principal', 'motaphotos'),
+			 'footer' => __('Menu footer', 'motaphotos'), 
+		)
+	);
 }
-add_action('after_setup_theme', 'register_my_menus');
+add_action('after_setup_theme', 'motaphotos_setup');
+

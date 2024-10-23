@@ -1,8 +1,14 @@
-<?php
-wp_nav_menu( array(
-    'theme_location' => 'footer',
-    'container' => 'nav',
-    'container_class' => 'footer-menu',
-    'menu_class' => 'footer-nav'
-) );
-?>
+ <footer>
+ <?php 
+	 wp_nav_menu(array(
+		 'theme_location' => 'footer',
+		 'menu_id' => 'Menu footer', 
+	 ));
+ ?>
+</footer>
+
+	<?php get_template_part( 'templates_part/modale' ); ?>
+    
+    <?php wp_footer(); ?>
+</body>
+</html>

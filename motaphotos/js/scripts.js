@@ -1,21 +1,21 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Get the modal
     var navigation = document.getElementById("myModal");
+    var modalContent = document.querySelector(".photo-modale"); 
     var btn_contact = document.getElementById("btn_contact");
-    var btn_close = document.getElementById("btn_close");
-    var closeLink = document.querySelectorAll(".closeLink");
-    
-    btn_contact.onclick = openNav;
-    btn_close.onclick = closeNav;
-    closeLink.forEach(function (link) {
-      link.onclick = closeNav;
+
+document.addEventListener('click', function(event) {
+        if (navigation.classList.contains("active") && !modalContent.contains(event.target) && event.target !== btn_contact) {
+            closeNav();
+        }
     });
+
+    btn_contact.onclick = openNav;
     
     function openNav() {
-      navigation.classList.add("active");
+        navigation.classList.add("active");
     }
+    
     function closeNav() {
-      navigation.classList.remove("active");
-      btn_close.innerHTML = "&times;";
+        navigation.classList.remove("active");
     }
 });
