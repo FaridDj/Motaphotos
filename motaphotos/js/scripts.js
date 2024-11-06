@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function openNav() {
         navigation.classList.add("active");
-        modalOverlay.classList.add("active"); // Utilise également "active" pour faire apparaître l'overlay
+        modalOverlay.classList.add("active");
     }
 
     function closeNav() {
