@@ -67,7 +67,7 @@
             </div>
         
 
-        <div class="photo_img inactive-mobile" id="photo-lightbox">
+        <div class="photo-img" id="photo-lightbox">
             <?php
             // Affichage de la miniature
             echo get_the_post_thumbnail($post_id, 'large'); 
@@ -80,7 +80,9 @@
             <div class="contact-texte">
                 <p>Cette photo vous intéresse ?</p>
             </div>
-            <a href="#" id="btn_contact" class="active bouton-contact" onclick="photo-ref('<?php echo $ma_reference; ?>')" >Contact</a>
+            <a id="btn_contact2" class="active bouton-contact" href="#">
+            <input type="hidden" value="<?php $ma_reference = get_post_meta($post_id, 'reference_de_la_photo', true);?>">Contact</a>
+            
             
             
          </div>
@@ -150,4 +152,6 @@
     </div>
 </div>
 
-<?php wp_footer(); ?>
+<?php get_footer(); ?>
+
+

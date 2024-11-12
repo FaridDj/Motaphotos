@@ -21,7 +21,7 @@ add_action('after_setup_theme', 'motaphotos_setup');
 
 function modify_homepage_query( $query ) {
     if ( $query->is_home() && $query->is_main_query() ) {
-        $query->set( 'post_type', array( 'photos' ) ); // Remplace "book" par ton custom post type
+        $query->set( 'post_type', array( 'photos' ) );
     }
 }
 add_action( 'pre_get_posts', 'modify_homepage_query' );
