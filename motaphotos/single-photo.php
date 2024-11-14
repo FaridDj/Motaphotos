@@ -1,7 +1,7 @@
 <?php
     get_header();
 ?>
-<div class="positionnement general">
+<div class="positionnement-general">
     <div class="emplacement-haut">
         
             <div class="photo-informations">
@@ -145,13 +145,7 @@
         }
         ?>
         </div>
-        
-        <div class="presentation-bouton">
-            <a href="http://localhost/motaphotos.com"><input class="bouton" type="button" value="Toutes les photos"></a>
-        </div>
-    </div>
-</div>
-
+  
 <?php get_footer(); ?>
 
 

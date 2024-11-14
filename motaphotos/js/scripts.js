@@ -29,3 +29,27 @@ document.addEventListener('DOMContentLoaded', function () {
         modalOverlay.classList.remove("active");
     }
 });
+
+// Menu burger
+
+var btnBurger = document.getElementById("btn_burger"); 
+var closeBtn = document.getElementById("closeBtn");
+var nav = document.querySelector("nav");
+
+btnBurger.onclick = openMenu;
+closeBtn.onclick = closeMenu;
+
+function openMenu() {
+  nav.style.display = 'block';
+  nav.classList.add('active');
+  closeBtn.style.display = 'block';
+  btnBurger.style.display = 'none';
+}
+
+// Fonction pour fermer le menu
+function closeMenu() {
+  nav.style.display = 'none';
+  nav.classList.remove('active');
+  closeBtn.style.display = 'none';
+  btnBurger.style.display = 'block';
+}

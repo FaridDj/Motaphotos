@@ -18,10 +18,15 @@
                 wp_nav_menu(array(
                 'items_wrap'     => '<ul id="%1$s" class="%2$s">%3$s<li><a href="#" id="btn_contact" class="active">Contact</a></li></ul>',
                 ));   
-                 
-                
             ?>
         </nav>
-    </header>
+        <div class="menu-mobile">
+    <img src="<?php echo get_template_directory_uri(); ?>/images/burger.png" alt="menu burger" id="btn_burger" />
+    <img src="<?php echo get_template_directory_uri(); ?>/images/fermeture.png" alt="close" id="closeBtn" />
+        </div>
+</div>
+
+
+  </header>
     
 
