@@ -3,37 +3,41 @@
 <main id="main" class="site-main" role="main">
     <section class="custom-photo-gallery">
         
+        <?php get_template_part( 'templates_part/photo_block' ); ?> 
 
-        <?php
-        // Requête pour récupérer les articles du Custom Post Type "photo"
-        $args = array(
-            'post_type'      => 'photo', // Custom Post Type
-            'posts_per_page' => 5,      // Nombre de photos à afficher
-        );
+        <?php afficher_image_hero(1); ?>
+            <div class="hero-title">
+                <H1> PHOTOGRAPHE EVENT</H1>
+            </div>
+            <div class="filter-selection">
 
-        $custom_query = new WP_Query( $args );
 
-        if ( $custom_query->have_posts() ) : ?>
-            <div class="photo-grid">
-            <?php
-            while ( $custom_query->have_posts() ) : $custom_query->the_post(); ?>
-                
-                <!-- Affiche la vignette si elle existe, sans le titre -->
-                <?php if ( has_post_thumbnail() ) : ?>
-                    <div class="photo-item">
-                        <a href="<?php the_permalink(); ?>"> <!-- Optionnel : lien vers l'article complet -->
-                            <?php the_post_thumbnail( 'large' ); // Affiche la vignette en taille large ?>
-                        </a>
-                    </div>
-                <?php endif; ?>
+<!-- Sélecteur des catégories -->
+<select id="category-select" class="category-select" name="category-select">
 
-            <?php endwhile; ?>
-            </div> <!-- Fermeture du grid -->
-            <?php wp_reset_postdata(); // Réinitialise après la boucle personnalisée ?>
-        <?php else : ?>
-            <p>Aucune photo trouvée.</p>
-        <?php endif; ?>
+    
+    <option value="">Sélectionner une catégorie</option>
+    <?php
+    $categories = get_categories(array('taxonomy' => 'categorie', 'hide_empty' => false));
+     foreach ($categories as $categorie) : ?>
+        <option value="<?php echo esc_attr($categorie->term_id); ?>">
+            <?php echo esc_html($categorie->name); ?>
+        </option>
+    <?php endforeach; ?>
+</select>
+
+<!-- Zone d'affichage des categorieaires (vide au départ) -->
+<div id="categories-area"></div>
+
+<div id="photo-gallery"></div>
+        <?php afficher_grille_photos(8); ?>
     </section>
 </main>
+
+
+
+<div class="ChargePlus">
+    <button id="ChargePlus" class="bouton-contact" >Charger plus</button>
+</div>
 
 <?php get_footer(); ?>
