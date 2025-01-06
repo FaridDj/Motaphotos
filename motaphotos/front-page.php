@@ -9,35 +9,31 @@
             <div class="hero-title">
                 <H1> PHOTOGRAPHE EVENT</H1>
             </div>
-            <div class="filter-selection">
-
-
-<!-- Sélecteur des catégories -->
-<select id="category-select" class="category-select" name="category-select">
-
-    
-    <option value="">Sélectionner une catégorie</option>
+            
+            <select id="category-select" class="category-select" name="category-select">
+    <option value="all" data-name="all" selected>Sélectionner une catégorie</option>
     <?php
-    $categories = get_categories(array('taxonomy' => 'categorie', 'hide_empty' => false));
-     foreach ($categories as $categorie) : ?>
-        <option value="<?php echo esc_attr($categorie->term_id); ?>">
-            <?php echo esc_html($categorie->name); ?>
-        </option>
-    <?php endforeach; ?>
+    // Récupérer toutes les catégories de photos
+    $categories = get_terms(array(
+        'taxonomy' => 'categorie',
+        'orderby' => 'name',
+        'hide_empty' => false
+    ));
+
+    if (!empty($categories) && !is_wp_error($categories)) :
+        foreach ($categories as $categorie) : ?>
+            <option value="<?php echo esc_attr($categorie->term_id); ?>" data-name="<?php echo esc_attr($categorie->name); ?>">
+                <?php echo esc_html($categorie->name); ?>
+            </option>
+        <?php endforeach;
+    else :
+        echo '<option>Aucune catégorie disponible</option>';
+    endif;
+    ?>
 </select>
 
-<!-- Zone d'affichage des categorieaires (vide au départ) -->
-<div id="categories-area"></div>
 
-<div id="photo-gallery"></div>
-        <?php afficher_grille_photos(8); ?>
-    </section>
-</main>
-
-
-
-<div class="ChargePlus">
-    <button id="ChargePlus" class="bouton-contact" >Charger plus</button>
-</div>
-
+<!-- Bouton pour charger les photos -->
+<div id="photos-area"></div>
+   
 <?php get_footer(); ?>

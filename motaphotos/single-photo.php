@@ -23,11 +23,13 @@
 
             <p>CATEGORIES : 
                 <?php
-                // Récupération de "categorie"
-                $terms = get_the_terms($post_id, 'categorie');
-                if ($terms && !is_wp_error($terms)) {
-                    foreach ($terms as $term) {
-                        echo $term->name . ' ';
+               
+               // Récupération de "categorie"
+               $terms = get_the_terms($post_id, 'categorie');
+               if ($terms && !is_wp_error($terms)) {
+                   foreach ($terms as $term) {
+                       $cat = $term->name;
+                       echo $cat;
                     }
                 } else {
                     echo 'Aucune catégorie définie pour cet article.';
@@ -117,20 +119,25 @@
     </div>
     
     <?php
-    // Arguments de la requête pour récupérer les photos similaires
-    $args = array(
-        'post_type'      => 'photo',
-        'posts_per_page' => 2,  // Par exemple 6 photos à afficher
-        'orderby'        => 'date',  // Tri par date
-        
-    );
+// Arguments de la requête pour récupérer les photos similaires
+$args = array(
+    'post_type' => 'photo', 
+    'posts_per_page' => 2, 
+    'tax_query' => array(
+        array(
+            'taxonomy' => 'categorie',
+            'field' => 'slug', 
+            'terms' => $cat,
+        ),
+    ),
+);
 
-    $custom_query = new WP_Query($args);
+// Création de la requête personnalisée
+$custom_query = new WP_Query($args);
 
-    if ($custom_query->have_posts()) : ?>
-        <div class="photo-details">
-        <?php
-        while ($custom_query->have_posts()) : $custom_query->the_post(); ?>
+if ($custom_query->have_posts()) : ?>
+    <div class="photo-details">
+        <?php while ($custom_query->have_posts()) : $custom_query->the_post(); ?>
             <!-- Affiche la vignette si elle existe -->
             <?php if (has_post_thumbnail()) : ?>
                 <div class="photo-item">
@@ -140,11 +147,11 @@
                 </div>
             <?php endif; ?>
         <?php endwhile; ?>
-        </div> <!-- Fermeture de la grid -->
-        <?php wp_reset_postdata(); // Réinitialiser après la boucle personnalisée ?>
-    <?php else : ?>
-        <p>Aucune photo trouvée.</p>
-    <?php endif; ?>
-</div>
+    </div> <!-- Fermeture de la grid -->
+    <?php wp_reset_postdata(); // Réinitialiser après la boucle personnalisée ?>
+<?php else : ?>
+    <p>Aucune photo trouvée.</p>
+<?php endif; ?>
+
 
 <?php get_footer(); ?>

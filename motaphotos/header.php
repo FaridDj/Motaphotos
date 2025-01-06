@@ -26,9 +26,4 @@
     <img src="<?php echo get_template_directory_uri(); ?>/images/fermeture.png" alt="close" id="closeBtn" />
         </div>
 </div>
-	
-
-
   </header>
-    
-

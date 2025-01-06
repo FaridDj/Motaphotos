@@ -1,40 +1,41 @@
+// Modal Logic
 document.addEventListener('DOMContentLoaded', function () {
-    var navigation = document.getElementById("myModal");
+    var modal = document.getElementById("myModal");
     var modalContent = document.querySelector(".photo-modale");
-    var btn_contact = document.getElementById("btn_contact");
-    var btn_contact2 = document.getElementById("btn_contact2");
+    var btnContact = document.getElementById("btn_contact");
+    var btnContact2 = document.getElementById("btn_contact2");
     var modalOverlay = document.querySelector(".overlay");
 
+    // Click event to close modal when clicking outside
     document.addEventListener('click', function(event) {
-
-        if (navigation.classList.contains("active") && 
+        if (modal.classList.contains("active") && 
             !modalContent.contains(event.target) && 
             event.target !== modalOverlay && 
-            event.target !== btn_contact && 
-            event.target !== btn_contact2) {
+            event.target !== btnContact && 
+            event.target !== btnContact2) {
             closeNav();
         }
     });
 
-    if (btn_contact2) {
-        btn_contact2.onclick = openNav;
+    // Open modal when buttons are clicked
+    if (btnContact2) {
+        btnContact2.onclick = openNav;
     }
-    btn_contact.onclick = openNav;
-    
+    btnContact.onclick = openNav;
 
+    // Open and Close Modal Functions
     function openNav() {
-        navigation.classList.add("active");
+        modal.classList.add("active");
         modalOverlay.classList.add("active");
     }
 
     function closeNav() {
-        navigation.classList.remove("active");
+        modal.classList.remove("active");
         modalOverlay.classList.remove("active");
     }
 });
 
-// Menu burger
-
+// Burger Menu Logic
 var btnBurger = document.getElementById("btn_burger"); 
 var closeBtn = document.getElementById("closeBtn");
 var nav = document.querySelector("nav");
@@ -56,31 +57,58 @@ function closeMenu() {
   btnBurger.style.display = 'block';
 }
 
-//recuperer les reférences
-
+//recuperer les reférences dans modale
 jQuery(document).ready(function($) {
+    if (typeof ma_reference !== 'undefined' && ma_reference !== '') {
   
-    if (typeof maReference !== 'undefined' && maReference !== '') {
-  
-        $("#la-reference").val(maReference);
+        $("#ma_reference").val(ma_reference);
     }
-})
-
-//Gestion de filtres
-document.querySelector('.category-select').addEventListener('change', function() {
-    var postID = this.getAttribute('data-categorie'); 
-    var nonce = this.getAttribute('data-nonce');
-    var categoryID = this.value;
-
-    var data = {
-        action: 'filtre_load',
-        postid: postID,
-        nonce: nonce,
-        category_id: categoryID, 
-        
-   };
-        
-   console.log(categoryID);
-    // Appel AJAX
-    
 });
+
+// Menu déroulant filtre photos
+
+document.addEventListener('DOMContentLoaded', function() {
+
+    function fetchPhotos(categoryName) {
+        var postID = document.querySelector('#category-select').getAttribute('data-categorie'); 
+        var nonce = ajax_params.nonce; 
+
+        // Données à envoyer pour la requête AJAX
+        var data = {
+            action: 'galerie_photos',
+            postid: postID,
+            nonce: nonce,
+            category_name: categoryName
+        };
+
+        // Requête AJAX avec fetch
+        fetch(ajax_params.ajaxurl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cache-Control': 'no-cache'
+            },
+            body: new URLSearchParams(data)
+        })
+        .then(response => response.text())
+        .then(responseData => {
+            document.querySelector('#photos-area').innerHTML = responseData;
+        })
+        .catch(error => {
+            console.error('Erreur de requête :', error);
+        });
+    }
+    // Lorsque l'utilisateur change de catégorie dans le menu déroulant
+    document.querySelector('#category-select').addEventListener('change', function() {
+        var categoryName = this.options[this.selectedIndex].getAttribute('data-name');
+
+        if (categoryName !== 'all') {
+            fetchPhotos(categoryName);
+        } else {
+            fetchPhotos('all');
+        }
+    });
+    // Charge toutes les photos dès le chargement de la page (si "all" est sélectionné par défaut)
+    fetchPhotos('all');
+});
+
