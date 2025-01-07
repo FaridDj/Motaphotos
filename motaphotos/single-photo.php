@@ -3,6 +3,13 @@
 ?>
 <div class="positionnement-general">
     <div class="emplacement-haut">
+    <div class="photo-img" id="photo-lightbox">
+            <?php
+            // Affichage de la photo
+            echo get_the_post_thumbnail($post_id, 'large'); 
+            ?>
+        </div>
+
         <div class="photo-informations">
             <h2>
                 <?php
@@ -66,13 +73,7 @@
                 ?>
             </p>
         </div>
-        <div class="photo-img" id="photo-lightbox">
-            <?php
-            // Affichage de la photo
-            echo get_the_post_thumbnail($post_id, 'large'); 
-            ?>
-        </div>
-    </div>
+            </div>
 
     <div class="emplacement-milieu">
         <div class="zone-contact">

@@ -34,21 +34,23 @@ function galerie_photos() {
     }
 
     $category_name = isset($_POST['category_name']) ? $_POST['category_name'] : ''; 
-    $photos_accueil = 8;
+    $date_format = isset($_POST['format_name']) ? $_POST['format_name'] : ''; 
+    $date_name = isset($_POST['date_name']) ? $_POST['date_name'] : ''; 
+
 
     if (!empty($category_name) && $category_name !== 'all') {
         $args['tax_query'] = array(
             array(
                 'taxonomy' => 'categorie',
                 'field'    => 'slug',
-                'terms'    => $category_name,
+                'terms'    => 8,
             ),
         );
     } else {
         $args = array(
             'post_type'      => 'photo',
             'posts_per_page' => 8,
-            'orderby'        => 'date',
+            'date'        => $date_name,
             'post_status'    => 'publish',
         );
     }

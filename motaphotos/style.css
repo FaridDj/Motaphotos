@@ -11,6 +11,8 @@ body {
    
    max-width: 100vw;
    padding: 0 5vw;
+
+   
 }
 
 .main-container {
@@ -30,15 +32,12 @@ header, footer {
    font-family: "SpaceMono", sans-serif;
    font-weight: 400;
    font-size: clamp(14px, 2vw + 1em, 20px);
-   margin: 0;
-   padding: 2vw;
+  z-index: 9;
 }
 
 header {
    position: sticky;
    top: 0;
-   padding-top: 2%;
-   padding-bottom: 4%;
    background-color: #fff;
 }
 
@@ -151,9 +150,7 @@ p label {
    cursor: pointer;   
 }
 
-.custom-photo-gallery {
-   text-align: center;
-}
+
 
 /* Code temporaire pour la page d'accueil */
 .photo-details {
@@ -203,9 +200,9 @@ p {
 }
 
 .emplacement-haut {
-   flex-direction: row;
+   flex-direction: row-reverse;
    display: flex;
-   justify-content: space-around;
+   justify-content: space-between;
    align-items: flex-end;
 }
 
@@ -213,15 +210,14 @@ p {
    width: 50vw; 
    padding-bottom: 2%;
    border-bottom: solid 2px #787878;
-   gap: 5%;
-}
+   }
 
 .emplacement-milieu {
    display: flex;
    flex-direction: row;
    border-bottom: solid 2px #787878;
    padding-bottom: 2%;
-   justify-content: space-between;
+   justify-content: space-between !important;
 }
 
 .contact-texte p {
@@ -287,10 +283,24 @@ p {
 }
 
 @media all and (max-width: 1170px) {
-
+   header {
+      margin-top: 3%;
+      margin-bottom: 3%;
+      border-bottom: solid 4px #787878;
+      padding-bottom: 2%;
+     z-index: 9;
+   }
    .menu-mobile {
       display: block;
       cursor: pointer;
+      
+   }
+
+   .photo-informations{
+      border-bottom:inherit;
+   }
+   .emplacement-milieu{
+      border-top: solid 2px #787878;
    }
 
   #closeBtn {
@@ -303,7 +313,7 @@ p {
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
-  }
+   }
 
   #photo-lightbox img {
    width: 88vw;
@@ -380,7 +390,17 @@ p {
 .modal.active {
   left: 10vw;
 }
-
+.photo-details{
+   display: flex;
+   flex-direction: column;
+}
+footer{
+   align-items: inherit;
+}
+.menu-pied-de-page-container li{
+  display: flex;
+  justify-content: center;
+}
 }
 
 @media all and (max-width: 982px) {
