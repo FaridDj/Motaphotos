@@ -66,21 +66,22 @@ jQuery(document).ready(function($) {
 });
 
 // Menu déroulant filtre photos
-
 document.addEventListener('DOMContentLoaded', function() {
-    function fetchPhotos(categoryName, format, dateOrder) {
-        var postID = document.querySelector('#category-select').getAttribute('data-categorie'); 
-        var nonce = ajax_params.nonce; 
+    function fetchPhotos(categoryName, formatName, dateOrder) {
+        var nonce = ajax_params.nonce;
 
         // Données à envoyer pour la requête AJAX
         var data = {
             action: 'galerie_photos',
-            postid: postID,
             nonce: nonce,
             category_name: categoryName,
-            format: format,      // Ajout du filtre format
-            date_order: dateOrder // Ajout du filtre de date
+            format_name: formatName,
+            date_order: dateOrder
         };
+
+        console.log('Category:', categoryName);
+        console.log('Format:', formatName);
+        console.log('Date Order:');
 
         // Requête AJAX avec fetch
         fetch(ajax_params.ajaxurl, {
@@ -93,46 +94,41 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.text())
         .then(responseData => {
-            document.querySelector('#photos-area').innerHTML = responseData;
+            // Met à jour la zone d'affichage des photos
+            document.querySelector('#photos-area').innerHTML = responseData; 
         })
         .catch(error => {
             console.error('Erreur de requête :', error);
         });
     }
 
-    // Lorsque l'utilisateur change de catégorie dans le menu déroulant
+    // Lorsque l'utilisateur change de catégorie
     document.querySelector('#category-select').addEventListener('change', function() {
-        var categoryName = this.options[this.selectedIndex].getAttribute('data-name');
-        var format = document.querySelector('#format-select').value; // Récupérer la valeur du format
-        var dateOrder = document.querySelector('#date-select').value; // Récupérer la valeur de tri par date
+        var categoryName = this.value;  // Récupère la valeur de la catégorie sélectionnée
+        var formatName = document.querySelector('#format-select').value;
+        var dateOrder = document.querySelector('#date-select').value;
 
-        if (categoryName !== 'all') {
-            fetchPhotos(categoryName, format, dateOrder);
-        } else {
-            fetchPhotos('all', format, dateOrder);
-        }
+        fetchPhotos(categoryName, formatName);
     });
 
-    // Lorsque l'utilisateur change le format
+    // Lorsque l'utilisateur change de format
     document.querySelector('#format-select').addEventListener('change', function() {
         var categoryName = document.querySelector('#category-select').value;
-        var format = this.value;
+        var formatName = this.value;
         var dateOrder = document.querySelector('#date-select').value;
-        
-        fetchPhotos(categoryName, format, dateOrder);
+
+        fetchPhotos(categoryName, formatName);
     });
 
-    // Lorsque l'utilisateur change le tri par date
+   // Lorsque l'utilisateur change de tri par date
     document.querySelector('#date-select').addEventListener('change', function() {
         var categoryName = document.querySelector('#category-select').value;
-        var format = document.querySelector('#format-select').value;
+        var formatName = document.querySelector('#format-select').value;
         var dateOrder = this.value;
-        
-        fetchPhotos(categoryName, format, dateOrder);
+
+        fetchPhotos(categoryName, formatName, dateOrder);
     });
 
-    // Charge toutes les photos dès le chargement de la page (si "all" est sélectionné par défaut)
-    fetchPhotos('all', 'all', 'asc');
+    // Charger toutes les photos par défaut
+    fetchPhotos('all', 'all');
 });
-
-

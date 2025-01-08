@@ -25,36 +25,43 @@ function motaphotos_setup() {
 }
 add_action('after_setup_theme', 'motaphotos_setup');
 
-// Fonction mise a jour des photos via AJAX
+// Fonction de mise a jour des photos via AJAX
 function galerie_photos() {
-    
+
+    // Vérification du nonce pour la sécurité
     if ( !isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'load_photos_handler') ) {
         echo 'Sécurité de la requête non valide.';
         wp_die();
     }
 
+    $date_order = isset($_POST['date_order']) ? $_POST['date_order'] : 'asc';
+    $args = array(
+        'post_type'      => 'photo',
+        'posts_per_page' => 8,
+        'post_status'    => 'publish',
+        'orderby'        => 'date',
+        'order'          => $date_order,
+    );
+
     $category_name = isset($_POST['category_name']) ? $_POST['category_name'] : ''; 
-    $date_format = isset($_POST['format_name']) ? $_POST['format_name'] : ''; 
-    $date_name = isset($_POST['date_name']) ? $_POST['date_name'] : ''; 
-
-
     if (!empty($category_name) && $category_name !== 'all') {
-        $args['tax_query'] = array(
-            array(
-                'taxonomy' => 'categorie',
-                'field'    => 'slug',
-                'terms'    => 8,
-            ),
-        );
-    } else {
-        $args = array(
-            'post_type'      => 'photo',
-            'posts_per_page' => 8,
-            'date'        => $date_name,
-            'post_status'    => 'publish',
+        $args['tax_query'][] = array(
+            'taxonomy' => 'categorie',
+            'field'    => 'slug',
+            'terms'    => $category_name,
         );
     }
 
+    $format_name = isset($_POST['format_name']) ? $_POST['format_name'] : ''; 
+    if (!empty($format_name) && $format_name !== 'all') {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'format',
+            'field'    => 'slug',
+            'terms'    => $format_name,
+        );
+    }
+
+    // Requête WP_Query avec les arguments définis
     $custom_query = new WP_Query($args);
 
     if ($custom_query->have_posts()) :
@@ -71,10 +78,12 @@ function galerie_photos() {
         endwhile;
         wp_reset_postdata();
         echo $html_output;
+    else :
+        echo 'Aucune photo trouvée.';
     endif;
+
     wp_die();
 }
 
 add_action('wp_ajax_galerie_photos', 'galerie_photos');
 add_action('wp_ajax_nopriv_galerie_photos', 'galerie_photos');
-
