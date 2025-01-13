@@ -1,7 +1,7 @@
-<?php
-    get_header();
-?>
-<div class="positionnement-general">
+<div class=border-opacity>
+<?php get_header();?>
+</div>
+<div class="positionnement-general padding">
     <div class="emplacement-haut">
     <div class="photo-img" id="photo-lightbox">
             <?php
@@ -115,7 +115,7 @@
 </div>
 
 <div class="presentation-autres-photos">
-    <div class="presentation-texte">
+    <div class="presentation-texte padding">
         <p>VOUS AIMEREZ AUSSI</p>
     </div>
     
@@ -137,7 +137,7 @@ $args = array(
 $custom_query = new WP_Query($args);
 
 if ($custom_query->have_posts()) : ?>
-    <div class="photo-details">
+    <div class="photo-details padding">
         <?php while ($custom_query->have_posts()) : $custom_query->the_post(); ?>
             <!-- Affiche la vignette si elle existe -->
             <?php if (has_post_thumbnail()) : ?>
@@ -148,11 +148,12 @@ if ($custom_query->have_posts()) : ?>
                 </div>
             <?php endif; ?>
         <?php endwhile; ?>
-    </div> <!-- Fermeture de la grid -->
+    </div>
     <?php wp_reset_postdata(); // Réinitialiser après la boucle personnalisée ?>
 <?php else : ?>
     <p>Aucune photo trouvée.</p>
 <?php endif; ?>
 
-
+<div class="trait-horizontal">
 <?php get_footer(); ?>
+</div>

@@ -79,9 +79,9 @@ document.addEventListener('DOMContentLoaded', function() {
             date_order: dateOrder
         };
 
-        console.log('Category:', categoryName);
-        console.log('Format:', formatName);
-        console.log('Date Order:');
+      //  console.log('Category:', categoryName);
+      //  console.log('Format:', formatName);
+      //  console.log('Date Order' ,dateOrder);
 
         // Requête AJAX avec fetch
         fetch(ajax_params.ajaxurl, {

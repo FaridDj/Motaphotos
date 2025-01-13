@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
 <main id="main" class="site-main" role="main">
-    <section class="custom-photo-gallery">
+    <section class="hero">
         
         <?php get_template_part( 'templates_part/photo_block' ); ?> 
 
@@ -9,10 +9,12 @@
             <div class="hero-title">
                 <H1> PHOTOGRAPHE EVENT</H1>
             </div>
-            
+</section>         
 <!-- Création des filtres -->
-<select id="category-select" class="category-select" name="category-select">
-    <option value="all" data-name="all" selected>Sélectionner une catégorie</option>
+ <div class= "filtres padding">
+    <div class="filtres-select">
+<select id="category-select" class="category-select filtre-rubriques" name="category-select">
+    <option value="all" data-name="all" selected>Catégorie</option>
     <?php
    
     $categories = get_terms(array(
@@ -28,13 +30,13 @@
             </option>
         <?php endforeach;
     else :
-        echo '<option>Aucune catégorie disponible</option>';
+        echo '<option>Aucune photo disponible avec cette catégorie </option>';
     endif;
     ?>
 </select>
 
-<select id="format-select" class="format-select" name="format-select">
-    <option value="all" data-name="all" selected>Sélectionner le format</option>
+<select id="format-select" class="format-select filtre-rubriques" name="format-select">
+    <option value="all" data-name="all" selected>Format</option>
     <?php
 
     $formats = get_terms(array(
@@ -50,16 +52,17 @@
             </option>
         <?php endforeach;
     else :
-        echo '<option>Aucun format disponible</option>';
+        echo '<option>Aucune photo disponible au format selectionné </option>';
     endif;
     ?>
 </select>
 
-<select id="date-select" class="date-select" name="date-select">
-    <option value="asc" selected>Date croissante</option>
-    <option value="desc">Date décroissante</option>
+<select id="date-select" class="date-select filtre-rubriques filter-left" name="date-select">
+    <option value="asc" selected>Trier par</option>    
+    <option value="asc" selected>Ordre croissant</option>
+    <option value="desc">Ordre décroissante</option>
 </select>
-
+</div>
 <div id="photos-area"></div>
-   
+</div>  
 <?php get_footer(); ?>
